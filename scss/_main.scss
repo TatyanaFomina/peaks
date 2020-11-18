@@ -1,0 +1,231 @@
+@mixin button-bg($bg) {
+  background-color: $bg;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 30px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  color: $secondary-text-color;
+  &:hover {
+    background-color: darken($bg, 8%);
+  }
+}
+
+@mixin links($lc, $ls) {
+  color: $lc;
+  font-size: $ls;
+  cursor: pointer;
+  &:hover {
+    color: #ecedb2;
+  }
+}
+
+%logo {
+  width: $width-logo;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: $main-font;
+  & p {
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: $height-logo;
+  }
+  & p span {
+    display: block;
+    font-size: 8px;
+  }
+}
+
+$rectangles: ('.header_heading', '.section_text', '.section_banner_heading');
+
+@each $rectangle in $rectangles {
+  #{$rectangle} {
+    position: relative;
+    z-index: 2;
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: $rectangle-color;
+      z-index: -1;
+    }
+  }
+}
+
+body {
+  font-family: $secondary-font;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: $main-content-bg;
+  line-height: $custom-line-height;
+  width: auto;
+}
+
+p {
+  margin: 0;
+}
+
+.header {
+  color: $main-text-color;
+  background-image: $header-img;
+  background-size: cover;
+  background-position: center;
+  border-bottom-right-radius: 30%;
+
+  .header-wrap {
+    padding: 15px 90px 120px;
+    position: relative;
+  }
+
+  .landing-logo {
+    @extend %logo;
+  }
+
+  .header_heading {
+    font-size: 45px;
+    font-weight: 700;
+    width: 450px;
+    padding-top: 60px;
+    line-height: 1.1;
+    &::after {
+      width: 190px;
+      height: 33px;
+      top: 77%;
+      left: 0%;
+    }
+  }
+
+  .header_text {
+    font-family: $main-font;
+    white-space: pre-line;
+    font-size: 11px;
+    padding: 30px 0 40px;
+  }
+
+  .header_button {
+    @include button-bg($main-color);
+    margin-right: 60px;
+  }
+
+  .login {
+    margin-left: 60px;
+    @include links($secondary-text-color, 12px);
+  }
+}
+
+.section {
+  .section_text {
+    color: $main-text-color;
+    font-size: 22px;
+    text-align: center;
+    padding-top: 15px;
+    &::after {
+      width: 97px;
+      height: 26px;
+      top: 31%;
+      left: 50.3%;
+    }
+  }
+
+  .section_card_wrap {
+    margin: 0 auto;
+    width: 700px;
+    padding-bottom: 60px;
+    .section_card {
+      background-color: $section-content-bg;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+
+      .section_card_img {
+        border-radius: 3px;
+      }
+
+      .section_card_right_container {
+        text-align: center;
+        padding: 10px;
+        color: $secondary-text-color;
+        margin: 0 90px 0 50px;
+
+        .section_card_heading {
+          padding-bottom: 10px;
+        }
+
+        .section_card_text {
+          font-size: 10px;
+          padding: 10px;
+          color: $section-text-color;
+          text-align: justify;
+          font-family: $main-font;
+        }
+
+        .section_link {
+          @include links($section-text-color, 11px);
+        }
+      }
+    }
+  }
+  .section_banner {
+    background-image: linear-gradient(90deg, $main-color, $secondary-color);
+    width: 710px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    .section_banner_text_wrap {
+      .section_banner_heading {
+        color: $main-text-color;
+        font-weight: 700;
+        font-size: 17px;
+        &::after {
+          left: 29%;
+          top: -22%;
+          width: 37px;
+          height: 26px;
+        }
+      }
+
+      .section_banner_text {
+        font-family: $main-font;
+        color: $section-text-color;
+        position: relative;
+        font-size: 10px;
+      }
+    }
+
+    .section_banner_button {
+      @include button-bg($main-color);
+    }
+  }
+}
+
+.footer {
+  margin-top: -43px;
+  font-size: 13px;
+  .footer-wrap {
+    font-family: $main-font;
+    background-color: $section-content-bg;
+    padding: 100px 50px 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: $section-text-color;
+
+    .footer_logo {
+      @extend %logo;
+    }
+
+    .footer_text {
+      width: 300px;
+    }
+  }
+}
